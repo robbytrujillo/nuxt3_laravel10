@@ -50,7 +50,7 @@ const updatePost = async () => {
   })
   .then(() => {
     // redirect
-    route.push({ path: "/posts"});
+    router.push({ path: "/posts"});
   })
   .catch((error) => {
     // asign response error data to state "errors"
@@ -60,9 +60,39 @@ const updatePost = async () => {
 </script>
 
 <template>
-  <div>
-    Page: foo
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card border-0 rounded shadow">
+          <div class="card-body">
+            <form @submit.prevent="updatePost()">
+              <div class="mb-3">
+                <label class="form-label fw-bold">Image</label>
+                <input type="file" class="form-control" @change="handleFileChange($event)">
+                <div v-if="errors.image" class="alert alert-danger mt-2">
+                  <span>{{ errors.image[0] }}</span>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">Title</label>
+                <input type="text" class="form-control" v-model="title">
+              <div v-if="errors.title" class="alert alert-danger mt-2">
+                 <span>{{ errors.title[0] }}</span>
+              </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-bold">Content</label>
+                <textarea class="form-control" v-model="content"></textarea>
+                <div v-if="errors.content" class="alert alert-danger mt-2">
+                  <span>{{ errors.content[0] }}</span>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-md btn-primary rounded-sm shadow border-0">Update</button>
+            </form>
+          </div>
+        </div>
+        </div>
+        </div>
   </div>
 </template>
 
-<style scoped></style>
