@@ -29,7 +29,34 @@ const handleFileChange = ( e: any ) => {
   image.value = e.target.files[0]
 }
 
+// method "updatePost"
+const updatePost = async () => {
+  // init form data
+  let formData = new FormData();
 
+  // asign state value to formData
+  formData.append('image', image.value);
+  formData.append('title', title.value);
+  formData.append('content', content.value);
+  formData.append('_method', "PATCH");
+
+  // store data with API
+  await $fetch (`${config.public.apiBase}/api/posts/${route.params.id}`, {
+    // method
+    method: "POST",
+
+    // data
+    body: formData
+  })
+  .then(() => {
+    // redirect
+    route.push({ path: "/posts"});
+  })
+  .catch((error) => {
+    // asign response error data to state "errors"
+    errors.value = error.data
+  });
+}
 </script>
 
 <template>
