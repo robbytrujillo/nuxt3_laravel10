@@ -1,7 +1,7 @@
 <script setup lang="ts">
 //meta title
 useHead({
-  title: "Create a Post - SantriKoding.com",
+  title: "Create a Post - robbocode.com",
 });
 
 //init config
